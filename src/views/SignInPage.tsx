@@ -8,6 +8,7 @@ import { Form, FormItem } from '../shared/Form';
 import { history } from '../shared/history';
 import { http } from '../shared/Http';
 import { Icon } from '../shared/Icon';
+import { refreshMe } from '../shared/me';
 import { hasError, validate } from '../shared/validate';
 import s from './SignInPage.module.scss';
 export const SignInPage = defineComponent({
@@ -34,14 +35,15 @@ export const SignInPage = defineComponent({
         { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
         { key: 'code', type: 'required', message: '必填' },
       ]))
-      if(!hasError(errors)) {
+      if (!hasError(errors)) {
         const response = await http.post<{ jwt: string }>('/session', formData)
         localStorage.setItem('jwt', response.data.jwt)
         // 使用 route 的写法
         // router.push('./sign_in?return_to=' + encodeUPIComponent(route.fullPath))
         
         // 使用 router 的写法
-        const returnTo = localStorage.getItem('returnTo')
+        const returnTo = route.query.return_to?.toString()
+        refreshMe()
         router.push(returnTo || '/')
       }
     }
@@ -95,3 +97,4 @@ export const SignInPage = defineComponent({
     )
   }
 })
+
