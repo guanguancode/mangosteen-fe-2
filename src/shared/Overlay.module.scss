@@ -8,7 +8,7 @@
   height: calc(100% - var(--top-safe-area-height));
 }
 .overlay {
-  position: fixed;
+  position: absolute;
   z-index: calc(var(--z-index-overlay) + 1);
   background: var(--overlay-bg);
   top: var(--top-safe-area-height);
@@ -30,6 +30,7 @@
   &_list {
     padding-top: 16px;
     font-size: 20px;
+    z-index: calc(var(--z-index-overlay) + 1);
   }
   > .icon {
     margin-right: 12px;
