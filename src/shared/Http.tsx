@@ -10,7 +10,7 @@ export class Http {
   instance: AxiosInstance
   constructor(baseURL: string) {
     this.instance = axios.create({
-      baseURL: 'http://121.196.236.94:8080/'
+      baseURL
     })
   }
   // read
@@ -34,7 +34,7 @@ export class Http {
 const mock = (response: AxiosResponse) => {
   if (location.hostname !== 'localhost'
     && location.hostname !== '127.0.0.1'
-    && location.hostname !== '192.168.3.57') { return false }
+    && location.hostname !== '192.168.13.1') { return false }
   switch (response.config?.params?._mock) {
     case 'tagIndex':
       [response.status, response.data] = mockTagIndex(response.config)
@@ -55,7 +55,7 @@ const mock = (response: AxiosResponse) => {
   return false
 }
 
-export const http = new Http('/api/v1')
+export const http = new Http('http://121.196.236.94:3000/api/v1')
 
 http.instance.interceptors.response.use(config => {
   const jwt = localStorage.getItem('jwt')
