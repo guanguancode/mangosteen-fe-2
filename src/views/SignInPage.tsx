@@ -36,8 +36,9 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
       if (!hasError(errors)) {
-        const response = await http.post<{ jwt: string }>('/session', formData)
-          .catch(onError)
+        const response = await http.post<{ jwt: string }>('/session', formData, {
+          params: { _mock: 'session' }
+        }).catch(onError)
         console.log(response)
         localStorage.setItem('jwt', response.data.jwt)
         // 使用 route 的写法
@@ -60,7 +61,7 @@ export const SignInPage = defineComponent({
       disabled()
       const response = await http
         .post('/validation_codes', { email: formData.email })
-        .catch(() => onError)
+        .catch(onError)
         .finally(enable)
       // 成功
       refValidationCode.value.startCount()
