@@ -36,11 +36,10 @@ export const SignInPage = defineComponent({
         { key: 'code', type: 'required', message: '必填' },
       ]))
       if (!hasError(errors)) {
-        const response = await http.post<{ jwt: string }>('/session', formData, {
-          params: { _mock: 'session' }
-        }).catch(onError)
-        console.log(response)
+        const response = await http.post<{ jwt: string }>('/session', formData)
+          .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
+        // history.push('/')
         // 使用 route 的写法
         // router.push('./sign_in?return_to=' + encodeUPIComponent(route.fullPath))
         
