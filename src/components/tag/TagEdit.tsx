@@ -6,6 +6,7 @@ import { EmojiSelect } from '../../shared/EmojiSelect';
 import { Rules, validate } from'../../shared/validate';
 import { TagForm } from "./TagForm";
 import s from "./Tag.module.scss";
+import { BackIcon } from "../../shared/BackIcon";
 
 export const TagEdit = defineComponent({
   setup: (props, context) => {
@@ -36,7 +37,7 @@ export const TagEdit = defineComponent({
       <MainLayout>
         {{
           title: () => "新建标签",
-          icon: () => <Icon name="left" onClick={() => {}} />,
+          icon: () => <BackIcon />,
           default: () => <>
             <TagForm />
             <div class={s.actions}>
