@@ -1,9 +1,33 @@
-import { faker } from "@faker-js/faker";
-import { AxiosRequestConfig } from "axios";
+import { faker } from '@faker-js/faker'
+import { AxiosRequestConfig } from 'axios';
 
-type Mock = (config: AxiosRequestConfig) => [number,any]
+type Mock = (config: AxiosRequestConfig) => [number, any]
 
 faker.setLocale('zh_CN');
+
+export const mockTagEdit: Mock = config => {
+  const createTag = (attrs?: any) =>
+    ({
+      id: createId(),
+      name: faker.lorem.word(),
+      sign: faker.internet.emoji(),
+      kind: 'expenses',
+      ...attrs
+    })
+  return [200, {resource: createTag()}]
+}
+
+export const mockTagShow: Mock = config =>{
+  const createTag = (attrs?: any) =>
+    ({
+      id: createId(),
+      name: faker.lorem.word(),
+      sign: faker.internet.emoji(),
+      kind: 'expenses',
+      ...attrs
+    })
+  return [200, {resource: createTag()}]
+}
 
 export const mockItemCreate: Mock = config => {
   return [200, {
@@ -14,15 +38,15 @@ export const mockItemCreate: Mock = config => {
       "note": null,
       "tags_id": [3508],
       "happen_at": "2023-10-29T16:00:00.000Z",
-      "created_at": "2024-07-03T15:35:56.301Z",
-      "updated_at": "2024-08-03T15:35:56.301Z",
-      "kind": 'expenses'
+      "created_at": "2023-07-03T15:35:56.301Z",
+      "updated_at": "2023-08-03T15:35:56.301Z",
+      "kind": "expenses"
     }
   }]
 }
 export const mockSession: Mock = (config) => {
   return [200, {
-      jwt: faker.random.word()
+    jwt: faker.random.word()
   }]
 }
 
@@ -49,13 +73,15 @@ export const mockTagIndex: Mock = (config) => {
   const createBody = (n = 1, attrs?: any) => ({
     resources: createTag(n), pager: createPaper(page)
   })
-  if (kind === 'expenses' && (!page || page === 1))  {
+
+  if (kind === 'expenses' && (!page || page === 1)) {
     return [200, createBody(25)]
   } else if (kind === 'expenses' && page === 2) {
     return [200, createBody(1)]
   } else if (kind === 'income' && (!page || page === 1)) {
     return [200, createBody(25)]
   } else {
-    return [200, createBody(1) ]
+    return [200, createBody(1)]
   }
+
 }
