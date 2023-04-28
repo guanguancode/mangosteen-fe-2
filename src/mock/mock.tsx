@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 import { AxiosRequestConfig } from 'axios';
-import { config } from 'process';
 
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
