@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockItemCreate, mockItemIndex, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
+import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
 import { JSONValue } from "../env";
 
 type GetConfig = Omit<AxiosRequestConfig,'params' | 'url' | 'method'>
@@ -54,6 +54,9 @@ const mock = (response: AxiosResponse) => {
       return true
     case 'itemIndex':
       [response.status, response.data] = mockItemIndex(response.config)
+      return true
+    case 'itemIndexBalance':
+      [response.status, response.data] = mockItemIndexBalance(response.config)
       return true
   }
   return false
