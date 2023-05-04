@@ -29,6 +29,7 @@ declare module "*.vue" {
     user_id: number;
     amount: number;
     tags_id: number[];
+    tags?: Tag[],
     happen_at: string;
     kind: expenses | income;
   };
