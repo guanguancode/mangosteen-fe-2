@@ -23,6 +23,6 @@ const addZero = (n:number) => {
     return nString
   }
 }
-export const getMoeny = (n: number) => {
+export const getMoney = (n: number) => {
   return addZero(n / 100)
 }
