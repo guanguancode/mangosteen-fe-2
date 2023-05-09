@@ -29,7 +29,7 @@ export const Charts = defineComponent({
   setup: (props, context) => {
     const kind = ref('expenses')
     const data1 = ref<Data1>([])
-    const betterData1 = computed<[string, number][]>(()=> {
+    const betterData1 = computed<[string, number ][]>(()=> {
       if (!props.startDate || !props.endDate) { 
         return [] 
       }
