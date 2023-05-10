@@ -27,6 +27,7 @@ export const ItemSummary = defineComponent({
         happen_after: props.startDate,
         happen_before: props.endDate,
         page: page.value + 1,
+      }, {
         _mock: 'itemIndex',
       })
       const { resources, pager } = response.data
@@ -52,6 +53,7 @@ export const ItemSummary = defineComponent({
         happen_after: props.startDate,
         happen_before: props.endDate,
         page: page.value + 1,
+      }, {
         _mock: 'itemIndexBalance',
       })
       Object.assign(itemsBalance, response.data)
