@@ -1,5 +1,5 @@
 interface FData {
-  [k: string]: string | number | null | undefined | FData;
+  [k: string]: JSONValue
 }
 type Rule<T> = {
   key: keyof T;
