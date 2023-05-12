@@ -1,19 +1,18 @@
-import axios, { AxiosResponse } from 'axios';
-import { defineComponent, PropType, reactive, ref } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useBool } from '../hooks/useBool';
 import { MainLayout } from '../layouts/MainLayout';
 import { Button } from '../shared/Button';
 import { Form, FormItem } from '../shared/Form';
-import { history } from '../shared/history';
 import { http } from '../shared/Http';
 import { Icon } from '../shared/Icon';
-import { refreshMe } from '../shared/me';
 import { hasError, validate } from '../shared/validate';
 import s from './SignInPage.module.scss';
 import { BackIcon } from '../shared/BackIcon';
+import { useMeStore } from '../stores/useMeStore';
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const meStore = useMeStore()
     const formData = reactive({
       email: '1271835875@qq.com',
       code: ''
@@ -46,7 +45,7 @@ export const SignInPage = defineComponent({
         
         // 使用 router 的写法
         const returnTo = route.query.return_to?.toString()
-        refreshMe()
+        meStore.refreshMe()
         router.push(returnTo || '/')
       }
     }
