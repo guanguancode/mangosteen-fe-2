@@ -22,37 +22,40 @@ export const TagEdit = defineComponent({
     const onError = ()=>{
       Dialog.alert({ title:'提示',message:'删除失败' })
     }
-    const onDelete = async (options?: {withItem?: boolean})=>{
+    const onDelete = async (options?: {withItems?: boolean})=>{
       await Dialog.confirm({
         title:'确认',
         message:'是否确定删除'
       })
-      await http.delete(`/tags/${numberId}`, {
-        withItems: options?.withItem ? 'true' : 'false'
-      }, { _autoLoading: true })
-        .catch(onError)
+      await http
+        .delete(`/tags/${numberId}`, {
+          with_items: options?.withItems ? 'true' : 'false',
+        }, { _autoLoading: true })
+          .catch(onError)
       router.back()
     }
     return () => (
       <MainLayout>
         {{
-          title: () => "编辑标签",
+          title: () => '编辑标签',
           icon: () => <BackIcon />,
-          default: () => <>
-            <TagForm id={numberId} />
-            <div class={s.actions}>
-                <Button level='danger' class={s.removeTags}
-                 onClick={() =>onDelete()}>
-                    删除标签
-                </Button>
-                <Button level='danger' class={s.removeTagsAndItems}
-                 onClick={() =>onDelete({withItem: true})}>
-                    删除标签和记账
-                </Button>
-            </div> 
-          </>
+          default: () =>(
+            <>
+              <TagForm id={numberId} />
+                <div class={s.actions}>
+                  <Button level="danger" class={s.removeTags}
+                   onClick={() =>onDelete()}>
+                      删除标签
+                  </Button>
+                  <Button level="danger" class={s.removeTagsAndItems}
+                   onClick={() =>onDelete({withItems: true})}>
+                      删除标签和记账
+                  </Button>
+                </div>
+            </>
+          ),
         }}
       </MainLayout>
-    );
+    )
   },
 })

@@ -7,7 +7,7 @@ import { hasError, Rules, validate } from "../../shared/validate";
 import s from "./Tag.module.scss";
 import { useRoute, useRouter } from "vue-router";
 import { http } from "../../shared/Http";
-import { Resource, Tag } from "../../env";
+import { FormErrors, Resource, Tag } from "../../env";
 
 export const TagForm = defineComponent({
   props: {

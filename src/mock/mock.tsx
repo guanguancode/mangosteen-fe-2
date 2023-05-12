@@ -11,18 +11,18 @@ export const mockItemSummary: Mock = (config) => {
   if (group_by === 'happen_at' && kind === 'expenses') {
     return [200, {
       groups: [
-        { "happen_at": "2023-04-18T00:00:00.000+0800", "amount": 100 },
-        { "happen_at": "2023-04-19T00:00:00.000+0800", "amount": 300 },
-        { "happen_at": "2023-04-22T00:00:00.000+0800", "amount": 200 },
+        { happen_at: "2023-04-18T00:00:00.000+0800", amount: 100 },
+        { happen_at: "2023-04-19T00:00:00.000+0800", amount: 300 },
+        { happen_at: "2023-04-22T00:00:00.000+0800", amount: 200 },
       ],
       summary: 600
     }]
   } else if (group_by === 'happen_at' && kind === 'income') {
     return [200, {
       groups: [
-        { "happen_at": "2023-04-18T00:00:00.000+0800", "amount": 200 },
-        { "happen_at": "2023-04-19T00:00:00.000+0800", "amount": 300 },
-        { "happen_at": "2023-04-22T00:00:00.000+0800", "amount": 400 },
+        { happen_at: "2023-04-18T00:00:00.000+0800", amount: 200 },
+        { happen_at: "2023-04-19T00:00:00.000+0800", amount: 300 },
+        { happen_at: "2023-04-22T00:00:00.000+0800", amount: 400 },
       ],
       summary: 1000
     }]
@@ -78,8 +78,8 @@ export const mockItemIndex: Mock = (config) => {
       tag_ids: [createId()],
       tags: [createTag()],
       happen_at: faker.date.past().toISOString(),
-      kind: config.params.kind,
-    }))
+      kind: config.params.kind
+    } as Item))
   const createBody = (n = 1, attrs?: any) => ({
     resources: createItem(n),
     pager: createPaper(page),
