@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive, ref, watch } from 'vue';
+import { defineComponent, PropType, reactive, ref, watch, onMounted, onUnmounted } from 'vue';
 import { FloatButton } from '../../shared/FloatButton';
 import s from './ItemSummary.module.scss';
 import { Item, Resources } from '../../env';
@@ -105,7 +105,7 @@ export const ItemSummary = defineComponent({
             </ol>
             <div class={s.more}>
               {itemStore.hasMore ? (
-                <Button onClick={() => itemStore.fetchItems(props.startDate, props.endDate)}>加载更多</Button>
+                <Button onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
               ) : (
                 <span>没有更多</span>
               )}
