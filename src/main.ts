@@ -6,6 +6,7 @@ import { history } from './shared/history';
 import '@svgstore';
 import { createPinia, storeToRefs } from 'pinia';
 import { useMeStore } from './stores/useMeStore';
+import { Dialog } from 'vant'
 
 const router = createRouter({ history, routes })
 const pinia = createPinia()
@@ -15,7 +16,7 @@ app.use(pinia)
 app.mount('#app')
 
 const meStore = useMeStore()
-const {mePromise} = storeToRefs(meStore)
+const { mePromise } = storeToRefs(meStore)
 meStore.fetchMe()
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
@@ -37,7 +38,7 @@ router.beforeEach((to, from) => {
   }
   return mePromise!.value!.then(
     () => true,
-    () => '/sign_in?return_to=' + to.path
+    () => '/sign_in?return_to=' + from.path
   )
 })
 
