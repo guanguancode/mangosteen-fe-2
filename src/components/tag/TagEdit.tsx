@@ -1,9 +1,6 @@
 import { Button } from "../../shared/Button";
-import { Icon } from "../../shared/Icon";
-import { defineComponent, reactive } from 'vue';
+import { defineComponent } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
-import { EmojiSelect } from '../../shared/EmojiSelect';
-import { Rules, validate } from'../../shared/validate';
 import { TagForm } from "./TagForm";
 import s from "./Tag.module.scss";
 import { BackIcon } from "../../shared/BackIcon";
@@ -43,13 +40,12 @@ export const TagEdit = defineComponent({
             <>
               <TagForm id={numberId} />
                 <div class={s.actions}>
-                  <Button level="danger" class={s.removeTags}
-                   onClick={() =>onDelete()}>
-                      删除标签
-                  </Button>
-                  <Button level="danger" class={s.removeTagsAndItems}
-                   onClick={() =>onDelete({withItems: true})}>
-                      删除标签和记账
+                  <Button
+                    level="danger"
+                    class={s.removeTagsAndItems}
+                    onClick={() =>onDelete({ withItems: true })}
+                  >
+                      删除标签(对应记账也会被删除)
                   </Button>
                 </div>
             </>
