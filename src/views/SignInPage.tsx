@@ -39,11 +39,6 @@ export const SignInPage = defineComponent({
         const response = await http.post<{ jwt: string }>('/session', formData, {_autoLoading: true })
           .catch(onError)
         localStorage.setItem('jwt', response.data.jwt)
-        // history.push('/')
-        // 使用 route 的写法
-        // router.push('./sign_in?return_to=' + encodeUPIComponent(route.fullPath))
-        
-        // 使用 router 的写法
         const returnTo = route.query.return_to?.toString()
         meStore.refreshMe()
         router.push(returnTo || '/')
