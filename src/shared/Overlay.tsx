@@ -11,7 +11,7 @@ export const Overlay = defineComponent({
       type: Function as PropType<() => void>,
     },
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const meStore = useMeStore()  
     const close = () => {
       props.onClose?.()
@@ -28,6 +28,7 @@ export const Overlay = defineComponent({
         message: '是否确认要退出登录？',
       })
       localStorage.removeItem('jwt')
+      window.location.reload()
     }
     return () => (
       <>
@@ -81,7 +82,7 @@ export const Overlay = defineComponent({
 })
 
 export const OverlayIcon = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     const refOverlayVisible = ref(false)
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value
