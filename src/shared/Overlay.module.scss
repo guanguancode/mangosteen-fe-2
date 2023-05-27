@@ -35,6 +35,7 @@
   &_list {
     padding-top: 16px;
     font-size: 20px;
+    background: var(--overlay-bg);
     z-index: calc(var(--z-index-overlay) + 1);
   }
   > .icon {
