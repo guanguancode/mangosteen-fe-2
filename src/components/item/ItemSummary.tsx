@@ -1,17 +1,16 @@
-import { defineComponent, PropType, reactive, ref, watch, onMounted, onUnmounted } from 'vue';
-import { FloatButton } from '../../shared/FloatButton';
-import s from './ItemSummary.module.scss';
-import { Item, Resources } from '../../env';
-import { http } from '../../shared/Http';
-import { Button } from '../../shared/Button';
-import { Money } from '../../shared/Money';
-import { Datetime } from '../../shared/DateTime';
-import { Center } from '../../shared/Center';
-import { Icon } from '../../shared/Icon';
-import { RouterLink } from 'vue-router';
-import { useAfterMe } from '../../hooks/useAfterMe';
-import { useMeStore } from '../../stores/useMeStore';
-import { useItemStore } from '../../stores/useItemStore';
+import { defineComponent, onMounted, onUnmounted, PropType, reactive, ref, watch } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useAfterMe } from '../../hooks/useAfterMe'
+import { Button } from '../../shared/Button'
+import { Center } from '../../shared/Center'
+import { Datetime } from '../../shared/DateTime'
+import { FloatButton } from '../../shared/FloatButton'
+import { http } from '../../shared/Http'
+import { Icon } from '../../shared/Icon'
+import { Money } from '../../shared/Money'
+import { useItemStore } from '../../stores/useItemStore'
+import { useMeStore } from '../../stores/useMeStore'
+import s from './ItemSummary.module.scss'
 export const ItemSummary = defineComponent({
   props: {
     startDate: {
@@ -28,29 +27,30 @@ export const ItemSummary = defineComponent({
     useAfterMe(() => itemStore.fetchItems(props.startDate, props.endDate))
 
     watch(
-      () => [props.startDate, props.endDate], 
+      () => [props.startDate, props.endDate],
       () => {
         itemStore.$reset()
         itemStore.fetchItems(props.startDate, props.endDate)
       }
     )
+
     const itemsBalance = reactive({
-      expenses: 0, 
-      income: 0, 
+      expenses: 0,
+      income: 0,
       balance: 0
     })
-    const fetchItemsBalance = async ()=>{
-      if(!props.startDate || !props.endDate){ 
+    const fetchItemsBalance = async () => {
+      if (!props.startDate || !props.endDate) {
         return
       }
       const response = await http.get(
-        '/items/balance', 
+        '/items/balance',
         {
           happen_after: props.startDate,
-          happen_before: props.endDate,
-        }, 
+          happen_before: props.endDate
+        },
         {
-          _mock: 'itemIndexBalance',
+          _mock: 'itemIndexBalance'
         }
       )
       Object.assign(itemsBalance, response.data)
@@ -60,15 +60,15 @@ export const ItemSummary = defineComponent({
       () => [props.startDate, props.endDate],
       () => {
         Object.assign(itemsBalance, {
-          expenses: 0, 
-          income: 0, 
+          expenses: 0,
+          income: 0,
           balance: 0
         })
         fetchItemsBalance()
       }
     )
-    return () => 
-      !props.startDate || !props.endDate ?(
+    return () =>
+      !props.startDate || !props.endDate ? (
         <div>请先选择时间范围</div>
       ) : (
         <div class={s.wrapper}>
@@ -118,7 +118,7 @@ export const ItemSummary = defineComponent({
             </>
           ) : (
             <>
-              <Center class={s.pig_wrapper} direction='|'>
+              <Center class={s.pig_wrapper} direction="|">
                 <Icon name="pig" class={s.pig} />
                 <p>目前没有数据</p>
               </Center>
