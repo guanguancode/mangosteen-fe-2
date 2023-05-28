@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import { type } from "os";
+// import { type } from "os";
 
 declare module "*.vue" {
     import type { DefineComponent } from "vue";
@@ -8,7 +8,7 @@ declare module "*.vue" {
     const component: DefineComponent<{}, {}, any>;
     export default component;
   }
-  
+  declare var DEBUG: boolean
   type JSONValue =
     | null
     | boolean
