@@ -47,10 +47,12 @@ export const ItemSummary = defineComponent({
         '/items/balance', 
         {
           happen_after: props.startDate,
-          happen_before: props.endDate,
+          // 最后一行去掉逗号
+          happen_before: props.endDate
         }, 
         {
-          _mock: 'itemIndexBalance',
+          // 最后一行去掉逗号
+          _mock: 'itemIndexBalance'
         }
       )
       Object.assign(itemsBalance, response.data)
@@ -118,7 +120,8 @@ export const ItemSummary = defineComponent({
             </>
           ) : (
             <>
-              <Center class={s.pig_wrapper} direction='|'>
+            {/* ''改为"" */}
+              <Center class={s.pig_wrapper} direction="|">
                 <Icon name="pig" class={s.pig} />
                 <p>目前没有数据</p>
               </Center>
